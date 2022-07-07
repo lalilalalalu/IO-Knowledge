@@ -173,8 +173,6 @@ Project Link: [https://github.com/lalilalalalu/IO-Knowledge](https://github.com/
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
