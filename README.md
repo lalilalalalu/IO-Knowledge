@@ -56,9 +56,10 @@
 
 
 ### Built With
-
-* [![Angular][Angular.io]][Angular-url]
-* [![Python][Python]][Python-url]
+#### IO-Knowledge-Analyzer
+[![Angular][Angular.io]][Angular-url]
+#### IO-Knowledge-Extractor and IO-Knowledge-API
+[![Python][Python3]](https://www.python.org/) [![Flask][flask]](https://www.python.org/)
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -207,3 +208,5 @@ Project Link: [https://github.com/lalilalalalu/IO-Knowledge](https://github.com/
 [io500Charts]: figures/io500Charts.png
 [multiComp2]: figures/multiComp2.PNG
 [io500Testcases]: figures/io500Testcases.PNG
+[Python3]: https://img.shields.io/badge/Python3-563D7C?style=for-the-badge&logo=python&logoColor=white
+[flask]: https://img.shields.io/badge/Flask-563D7C?style=for-the-badge&logo=flask&logoColor=white
