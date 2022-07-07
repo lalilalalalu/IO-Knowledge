@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>Inspect View</h2>
+<mat-dialog-content class="mat-typography">
+
+  <div >
+    <mat-form-field appearance="fill" style="width: 50%;">
+      <mat-label>Select yAxis</mat-label>
+      <mat-select [(value)]="selectedC" (selectionChange)="update()">
+        <mat-option *ngFor="let option of optionsC" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill" style="width: 50%;">
+      <mat-label>Select xAxis</mat-label>
+      <mat-select [(value)]="selectedR" (selectionChange)="update()">
+        <mat-option *ngFor="let option of optionsR" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
+
+   <div style="display: block; min-height: 600px;">
+        <ngx-charts-bar-horizontal-2d *ngIf="ws.multiSum.length!=0"
+        [results]="ws.multiSum"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="true"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="ws.multiKey"
+        [yAxisLabel]="ws.multiKeyC"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)"
+        >
+      </ngx-charts-bar-horizontal-2d>
+    </div>
+    <div style="display: block; min-height: 600px;">
+      <ngx-charts-box-chart *ngIf="ws.box_multi.length!=0"
+      [results]="ws.box_multi"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="true"
+      [animations]="true"
+      [strokeColor]="'#000000'"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="ws.box_key_x"
+      [yAxisLabel]="ws.box_key_y"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)"
+      >
+    </ngx-charts-box-chart>
+  </div>
+
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Export</button>
+</mat-dialog-actions>

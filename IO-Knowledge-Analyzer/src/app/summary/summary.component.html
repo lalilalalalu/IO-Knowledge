@@ -1,0 +1,221 @@
+<div class="component-viewer">
+      <form>
+        <mat-form-field appearance="fill" [ngStyle]="{width:'100%', display: 'block'}">
+          <mat-label>Select Command - Single</mat-label>
+          <mat-select [(ngModel)]="selectedValue" name="p" (selectionChange)="getSummary()">
+            <mat-option *ngFor="let p of performances" [value]="p">
+              {{p.cmd}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-tab-group>
+      <mat-tab label="Summary">
+        <mat-card *ngIf="this.selectedValue">
+         <!--
+          <mat-card-title>Summary:</mat-card-title>
+         --> 
+          <div>
+            <mat-accordion [multi]="true">
+                <mat-expansion-panel *ngFor="let summary of summaries" [expanded]="true" >
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+                     <p>Summary of {{summary.operation}}</p>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                    </mat-panel-description>
+                  </mat-expansion-panel-header>
+                  <mat-tab-group>
+                    <mat-tab label="Summarized"> 
+                      <mat-form-field *ngFor="let sk of summary | keyvalue" class="example-form-field" appearance="fill">
+                        <mat-label>{{sk.key}}</mat-label>
+                        <input name={{sk.key}} matInput type="text" value ={{sk.value}}>
+                      </mat-form-field>
+<!--                       <div *ngFor="let sk of summary | keyvalue" class="example-form-field" appearance="fill">
+                        <mat-label>{{sk.key}} : {{sk.value}}</mat-label>
+                      </div> -->
+                    </mat-tab>
+                    <mat-tab label="Detailed"> 
+                      <table *ngIf="summary.operation == 'read'" mat-table [dataSource]="ws.results_r" class="mat-elevation-z8 demo-table" >
+                        <!-- Position Column -->
+                        <ng-container   matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef> ID. </th>
+                          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="summary_id">
+                          <th mat-header-cell *matHeaderCellDef> summary_id </th>
+                          <td mat-cell *matCellDef="let element"> {{element.summary_id}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="access">
+                          <th mat-header-cell *matHeaderCellDef> access type </th>
+                          <td mat-cell *matCellDef="let element"> {{element.access}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="blockKiB">
+                          <th mat-header-cell *matHeaderCellDef> blockKiB </th>
+                          <td mat-cell *matCellDef="let element"> {{element.blockKiB}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="bwMiB">
+                          <th mat-header-cell *matHeaderCellDef> abwMiB </th>
+                          <td mat-cell *matCellDef="let element"> {{element.bwMiB}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="closeTime">
+                          <th mat-header-cell *matHeaderCellDef> closeTime </th>
+                          <td mat-cell *matCellDef="let element"> {{element.closeTime}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="iops">
+                          <th mat-header-cell *matHeaderCellDef> iops </th>
+                          <td mat-cell *matCellDef="let element"> {{element.iops}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="latency">
+                          <th mat-header-cell *matHeaderCellDef> latency </th>
+                          <td mat-cell *matCellDef="let element"> {{element.latency}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="openTime">
+                          <th mat-header-cell *matHeaderCellDef> openTime </th>
+                          <td mat-cell *matCellDef="let element"> {{element.openTime}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="totalTime">
+                          <th mat-header-cell *matHeaderCellDef> totalTime </th>
+                          <td mat-cell *matCellDef="let element"> {{element.totalTime}} </td>
+                        </ng-container>
+                  
+                        <ng-container   matColumnDef="wrRdTime">
+                          <th mat-header-cell *matHeaderCellDef> wrRdTime </th>
+                          <td mat-cell *matCellDef="let element"> {{element.wrRdTime}} </td>
+                        </ng-container>
+                  
+                        <ng-container   matColumnDef="xferKiB">
+                          <th mat-header-cell *matHeaderCellDef> xferKiB </th>
+                          <td mat-cell *matCellDef="let element"> {{element.openTime}} </td>
+                        </ng-container>
+                  
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                      <table *ngIf="summary.operation == 'write'" mat-table [dataSource]="ws.results_w" class="mat-elevation-z8 demo-table" >
+                        <!-- Position Column -->
+                        <ng-container   matColumnDef="id">
+                          <th mat-header-cell *matHeaderCellDef> ID. </th>
+                          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="summary_id">
+                          <th mat-header-cell *matHeaderCellDef> summary_id </th>
+                          <td mat-cell *matCellDef="let element"> {{element.summary_id}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="access">
+                          <th mat-header-cell *matHeaderCellDef> access type </th>
+                          <td mat-cell *matCellDef="let element"> {{element.access}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="blockKiB">
+                          <th mat-header-cell *matHeaderCellDef> blockKiB </th>
+                          <td mat-cell *matCellDef="let element"> {{element.blockKiB}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="bwMiB">
+                          <th mat-header-cell *matHeaderCellDef> abwMiB </th>
+                          <td mat-cell *matCellDef="let element"> {{element.bwMiB}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="closeTime">
+                          <th mat-header-cell *matHeaderCellDef> closeTime </th>
+                          <td mat-cell *matCellDef="let element"> {{element.closeTime}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="iops">
+                          <th mat-header-cell *matHeaderCellDef> iops </th>
+                          <td mat-cell *matCellDef="let element"> {{element.iops}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="latency">
+                          <th mat-header-cell *matHeaderCellDef> latency </th>
+                          <td mat-cell *matCellDef="let element"> {{element.latency}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="openTime">
+                          <th mat-header-cell *matHeaderCellDef> openTime </th>
+                          <td mat-cell *matCellDef="let element"> {{element.openTime}} </td>
+                        </ng-container>
+                        <ng-container   matColumnDef="totalTime">
+                          <th mat-header-cell *matHeaderCellDef> totalTime </th>
+                          <td mat-cell *matCellDef="let element"> {{element.totalTime}} </td>
+                        </ng-container>
+                  
+                        <ng-container   matColumnDef="wrRdTime">
+                          <th mat-header-cell *matHeaderCellDef> wrRdTime </th>
+                          <td mat-cell *matCellDef="let element"> {{element.wrRdTime}} </td>
+                        </ng-container>
+                  
+                        <ng-container   matColumnDef="xferKiB">
+                          <th mat-header-cell *matHeaderCellDef> xferKiB </th>
+                          <td mat-cell *matCellDef="let element"> {{element.openTime}} </td>
+                        </ng-container>
+                  
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      </table>
+                    
+                     </mat-tab>
+                  </mat-tab-group>
+                </mat-expansion-panel>
+            </mat-accordion>       
+          </div> 
+          </mat-card>
+      </mat-tab>
+      <mat-tab label="Dashboard">
+        <mat-card *ngIf="this.selectedValue">
+         <!--
+          <mat-card-title>Summary:</mat-card-title>
+         --> 
+            <div style="width: 50%; height: 400px; display: flex;">
+              <ngx-charts-line-chart *ngIf="ws.multi.length > 1"
+                [legend]="legend"
+                [showXAxisLabel]="showXAxisLabel"
+                [showYAxisLabel]="showYAxisLabel"
+                [xAxis]="xAxis"
+                [yAxis]="yAxis"
+                [xAxisLabel]="'Iteration'"
+                [yAxisLabel]="'Throughput [MiB]'"
+                [timeline]="timeline"
+                [results]="ws.multi"
+                (select)="onSelect($event)"
+                (activate)="onActivate($event)"
+                (deactivate)="onDeactivate($event)"
+                ></ngx-charts-line-chart>
+    
+                <ngx-charts-bar-vertical-2d *ngIf="ws.multi.length > 1"
+                  [legend]="legend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxis]="xAxis"
+                  [yAxis]="yAxis"
+                  [yAxisLabel]="'Number of Ops'"
+                  [xAxisLabel]="''"
+                  [results]="ws.multi2"
+                  (select)="onSelect($event)"
+                  (activate)="onActivate($event)"
+                  (deactivate)="onDeactivate($event)"
+                  ></ngx-charts-bar-vertical-2d>  
+              </div>
+          </mat-card>
+      </mat-tab>
+
+      <mat-tab label="Configuration">
+        <mat-card *ngIf="this.selectedValue">
+        <mat-card-title></mat-card-title>
+        <mat-form-field style="margin: 5px;" *ngFor="let item of selectedValue | keyvalue"  appearance="fill">
+          <mat-label>{{item.key}}</mat-label>
+          <input name={{item.key}} matInput type="text" [(ngModel)]=item.value>
+        </mat-form-field>
+        </mat-card>
+      </mat-tab>
+
+      <mat-tab label="Filesystem Settings">
+        <mat-card *ngIf="this.selectedValue">
+        <mat-card-title></mat-card-title>
+        <mat-form-field style="margin: 5px;" *ngFor="let item of selectedFilesystem | keyvalue"  appearance="fill">
+          <mat-label>{{item.key}}</mat-label>
+          <input name={{item.key}} matInput type="text" [(ngModel)]=item.value>
+        </mat-form-field>
+        </mat-card>
+      </mat-tab>
+
+      </mat-tab-group>
+
+    </form>
+
+
+</div>

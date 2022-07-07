@@ -1,0 +1,9 @@
+<highcharts-chart 
+*ngIf="isHighcharts"
+  [Highcharts]="Highcharts"
+  [options]="chartOptions"
+  [(update)]="updateFlag"
+  [oneToOne]="oneToOneFlag"
+  style="width: 50%; height: 400px; display: block;"
+></highcharts-chart>
+<button mat-button (click)="test()">Upload!</button>

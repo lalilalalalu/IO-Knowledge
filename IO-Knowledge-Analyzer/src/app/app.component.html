@@ -1,0 +1,96 @@
+
+<!--   <div style="height: 10%;">
+  <mat-grid-list cols="3" rowHeight="50px">
+    <mat-grid-tile  [colspan]="1" [rowspan]="1"> 
+      <div class="text-inside-grid-left"> 
+        <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" (click)="drawer.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+  </mat-grid-tile>
+  <mat-grid-tile  [colspan]="1" [rowspan]="1"><h2>IOR Analyser</h2></mat-grid-tile>
+    <mat-grid-tile  [colspan]="1" [rowspan]="1"><img src="../assets/imgs/logo.png " class="text-inside-grid-right"></mat-grid-tile>
+  </mat-grid-list>
+</div>
+ -->
+ <div style="height: 100%;">
+ <div style="height:70px; background-color: #673ab7; top: 0; display: block;">
+  <img src="../assets/imgs/IMG_4636.PNG " style="
+  position: absolute;
+  z-index: 1000;
+  top: -55px;
+  margin-left: 1%;
+  width: 160px;
+">
+  <button mat-icon-button color="basic" style=" position: absolute; right: 10px; margin: 10px; color: #ffffff;" aria-label="open" (click)="drawer.toggle()">
+  <mat-icon>menu</mat-icon>
+</button>
+</div>
+<div class="example-sidenav-content">
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened="true">
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>
+        <mat-icon>dialpad</mat-icon>
+        <a routerLink="/summary-component" routerLinkActive="active">Result Viewer</a>
+      </button>
+      <button mat-menu-item disabled>
+        <mat-icon>voicemail</mat-icon>
+        <span>Check voice mail</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications_off</mat-icon>
+        <span>Disable alerts</span>
+      </button>
+    </mat-menu>
+
+    <mat-list role="list">
+      <mat-list-item style="cursor: pointer" role="listitem">       
+        <button mat-menu-item routerLink="/summary-component" routerLinkActive="active">
+          <mat-icon>view_list</mat-icon>
+        <a >Result Viewer</a>
+      </button>
+    </mat-list-item>
+    <mat-list-item style="cursor: pointer" role="listitem">       
+      <button mat-menu-item routerLink="/comparison-component" routerLinkActive="active">
+        <mat-icon> multiline_chart</mat-icon>
+      <a >Result Comparision</a>
+    </button>
+  </mat-list-item>
+  <mat-list-item style="cursor: pointer" role="listitem">       
+    <button mat-menu-item routerLink="/config-generator-component">
+    	<mat-icon>settings</mat-icon>
+    <a  routerLinkActive="active">New Experiment</a>
+  </button>
+</mat-list-item>
+
+<mat-list-item style="cursor: pointer" role="listitem">       
+  <button mat-menu-item routerLink="/summary-component" routerLinkActive="active">
+    <mat-icon>sentiment_very_satisfied</mat-icon>
+  <a>Optimization Recommendation</a>
+</button>
+</mat-list-item>
+
+<mat-list-item style="cursor: pointer" role="listitem">       
+  <button mat-menu-item routerLink="/uploader-component" routerLinkActive="active">
+    <mat-icon>input</mat-icon>
+  <a >Use Local Data</a>
+</button>
+</mat-list-item>
+
+<mat-list-item style="cursor: pointer" role="listitem">       
+  <button mat-menu-item routerLink="/io500-component" routerLinkActive="active">
+    <mat-icon>input</mat-icon>
+  <a >IO500</a>
+</button>
+</mat-list-item>
+
+
+    </mat-list>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container></div>
+ </div>

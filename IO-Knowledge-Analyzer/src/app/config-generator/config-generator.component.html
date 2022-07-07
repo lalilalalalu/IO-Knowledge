@@ -1,0 +1,38 @@
+<mat-tab-group>
+  <mat-tab label="Use existing configuration"> 
+      <form>
+          <mat-form-field appearance="fill" [ngStyle]="{width:'100%', display: 'block'}">
+              <mat-label>Select Command - Single</mat-label>
+              <mat-select [(ngModel)]="selectedValue" name="p" (selectionChange)="selectConfig()">
+                <mat-option *ngFor="let p of performances" [value]="p">
+                  {{p.cmd}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+      </form>
+      <mat-card *ngIf="this.selectedValue">
+          <mat-card-title></mat-card-title>
+          <mat-form-field style="margin: 5px;" *ngFor="let item of newPerformance | keyvalue"  appearance="fill">
+            <mat-label>{{item.key}}</mat-label>
+            <input name={{item.key}} matInput type="text" [(ngModel)]=item.value>
+          </mat-form-field>
+          </mat-card>
+          <div *ngIf="selectedValue" style=" float: right;">
+              <button mat-flat-button color="primary" style="margin: 5px;" (click)="empty()"> Clear All</button>
+              <button mat-flat-button color="primary" style="margin: 5px;">Create Configuration</button>
+          </div>
+  </mat-tab>
+  <mat-tab label="Use empty configuration"> 
+    <mat-card>
+      <mat-card-title></mat-card-title>
+      <mat-form-field style="margin: 5px;" *ngFor="let item of newPerformance | keyvalue"  appearance="fill">
+        <mat-label>{{item.key}}</mat-label>
+        <input name={{item.key}} matInput type="text" [(ngModel)]=item.value>
+      </mat-form-field>
+      </mat-card>
+      <div *ngIf="selectedValue" style=" float: right;">
+          <button mat-flat-button color="primary" style="margin: 5px;" (click)="empty()"> Clear All</button>
+          <button mat-flat-button color="primary" style="margin: 5px;">Create Configuration</button>
+      </div>
+  </mat-tab>
+</mat-tab-group>

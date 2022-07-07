@@ -1,0 +1,101 @@
+<div class="component-viewer">
+    <form>
+      <mat-form-field appearance="fill" [ngStyle]="{width:'100%', display: 'block'}">
+        <mat-label>Select run </mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="p" (selectionChange)="selectIO500()">
+          <mat-option *ngFor="let run of io500" [value]="run">
+            {{run.version}}: {{run.start}} - {{run.end}} on {{run.name}} ({{run.processor_model}} , {{run.processor_architecture}}) with {{run.procs}} Procs
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-tab-group>
+        <mat-tab label="Summarized"> 
+            <mat-form-field *ngFor="let sk of selectedValue | keyvalue" class="example-form-field" appearance="fill">
+                    <mat-label>{{sk.key}}</mat-label>
+                    <input name={{sk.key}} matInput type="text" value ={{sk.value}}>
+            </mat-form-field>
+          </mat-tab>
+          <mat-tab label="Testcases"> 
+            <mat-accordion [multi]="true">
+                <mat-expansion-panel *ngFor="let tc of selectedTestCases" [expanded]="true" >
+                    <mat-expansion-panel-header>
+                        <mat-panel-title>
+                         <p>Testcase {{tc.name}} from {{tc.t_start}} - {{tc.t_end}}</p>
+                        </mat-panel-title>
+                        <mat-panel-description>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <mat-tab-group>
+                        <mat-tab label="Summary"> 
+                          <mat-form-field *ngFor="let tk of tc | keyvalue" class="example-form-field" appearance="fill">
+                            <mat-label>{{tk.key}}</mat-label>
+                            <input name={{tk.key}} matInput type="text" value ={{tk.value}}>
+                          </mat-form-field>
+                        </mat-tab>
+                        <mat-tab label="Configurations"> 
+                          <mat-form-field *ngFor="let tk of tc | keyvalue" class="example-form-field" appearance="fill">
+                            <mat-label>{{tk.key}}</mat-label>
+                            <input name={{tk.key}} matInput type="text" value ={{tk.value}}>
+                          </mat-form-field>
+                        </mat-tab>
+                        <mat-tab label="Details"> 
+                          <table mat-table [dataSource]="selectedTestCasesResults" class="mat-elevation-z8 demo-table" >
+                            <!-- Position Column -->
+                            <ng-container  matColumnDef="id">
+                              <th mat-header-cell *matHeaderCellDef> ID. </th>
+                              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                            </ng-container>
+                            <ng-container   matColumnDef="access">
+                              <th mat-header-cell *matHeaderCellDef> access type </th>
+                              <td mat-cell *matCellDef="let element"> {{element.access}} </td>
+                            </ng-container>
+                            <ng-container   matColumnDef="blockKiB">
+                              <th mat-header-cell *matHeaderCellDef> blockKiB </th>
+                              <td mat-cell *matCellDef="let element"> {{element.blockKiB}} </td>
+                            </ng-container>
+                            <ng-container   matColumnDef="bwMiB">
+                              <th mat-header-cell *matHeaderCellDef> abwMiB </th>
+                              <td mat-cell *matCellDef="let element"> {{element.bwMiB}} </td>
+                            </ng-container>
+                            <ng-container   matColumnDef="closeTime">
+                              <th mat-header-cell *matHeaderCellDef> closeTime </th>
+                              <td mat-cell *matCellDef="let element"> {{element.closeTime}} </td>
+                            </ng-container>
+                            <ng-container   matColumnDef="iops">
+                              <th mat-header-cell *matHeaderCellDef> iops </th>
+                              <td mat-cell *matCellDef="let element"> {{element.iops}} </td>
+                            </ng-container>
+                            <ng-container   matColumnDef="latency">
+                              <th mat-header-cell *matHeaderCellDef> latency </th>
+                              <td mat-cell *matCellDef="let element"> {{element.latency}} </td>
+                            </ng-container>
+                            <ng-container   matColumnDef="openTime">
+                              <th mat-header-cell *matHeaderCellDef> openTime </th>
+                              <td mat-cell *matCellDef="let element"> {{element.openTime}} </td>
+                            </ng-container>
+                            <ng-container   matColumnDef="totalTime">
+                              <th mat-header-cell *matHeaderCellDef> totalTime </th>
+                              <td mat-cell *matCellDef="let element"> {{element.totalTime}} </td>
+                            </ng-container>
+                      
+                            <ng-container   matColumnDef="wrRdTime">
+                              <th mat-header-cell *matHeaderCellDef> wrRdTime </th>
+                              <td mat-cell *matCellDef="let element"> {{element.wrRdTime}} </td>
+                            </ng-container>
+                      
+                            <ng-container   matColumnDef="xferKiB">
+                              <th mat-header-cell *matHeaderCellDef> xferKiB </th>
+                              <td mat-cell *matCellDef="let element"> {{element.openTime}} </td>
+                            </ng-container>
+                      
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                          </table>
+                         </mat-tab>
+                      </mat-tab-group>
+                </mat-expansion-panel>
+            </mat-accordion>     
+          </mat-tab>
+    </mat-tab-group>
+  </form>
+</div>

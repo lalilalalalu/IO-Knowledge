@@ -1,0 +1,119 @@
+<div class="component-viewer">
+  <div class="example-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($any($event.target).value)" placeholder="Filter">
+    </mat-form-field>
+    <div style=" text-align: right; display: inline-block; width: 3%; margin-left: 1%;">
+      <button mat-flat-button color="primary" (click)="openDialog()" [disabled]="clickedRows.size == 0">Inspect</button>
+    </div>
+  </div>
+  <div style="display: block; min-height: 200px;">
+    <ngx-charts-box-chart *ngIf="ws.box_multi.length!=0"
+    [results]="ws.box_multi"
+    [xAxis]="true"
+    [yAxis]="true"
+    [legend]="false"
+    [animations]="true"
+    [strokeColor]="'#000000'"
+    [showXAxisLabel]="true"
+    [showYAxisLabel]="true"
+    [xAxisLabel]="ws.box_key_x"
+    [yAxisLabel]="ws.box_key_y"
+    (select)="onSelect($event)"
+    (activate)="onActivate($event)"
+    (deactivate)="onDeactivate($event)"
+    >
+  </ngx-charts-box-chart>
+</div>
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)" *ngIf="ws.performances.length > 1 "
+  class="mat-elevation-z8 demo-table">
+
+  <ng-container matColumnDef="id" sticky>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by id">
+      ID
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+<!-- Position Column -->
+<ng-container matColumnDef="platform">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by platform">
+    Platform
+  </th>
+  <td mat-cell *matCellDef="let element"> {{element.platform}} </td>
+</ng-container>
+
+
+<ng-container matColumnDef="cmd">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by cmd">
+    CMD
+  </th>
+  <td mat-cell *matCellDef="let element"> {{element.cmd}} </td>
+</ng-container>
+
+<!-- Name Column -->
+<ng-container matColumnDef="api">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by api">
+    API
+  </th>
+  <td mat-cell *matCellDef="let element"> {{element.api}} </td>
+</ng-container>
+
+<ng-container matColumnDef="transferSize">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by transferSize">
+    Transfersize
+  </th>
+  <td mat-cell *matCellDef="let element"> {{element.transferSize}} </td>
+</ng-container>
+
+<ng-container matColumnDef="filePerProc">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by filePerProc">
+    File Per Proc
+  </th>
+  <td mat-cell *matCellDef="let element"> {{element.filePerProc === 1 ? 'True' : 'False'}} </td>
+</ng-container>
+
+
+<!-- Weight Column -->
+<ng-container matColumnDef="nodes">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by nodes">
+    Nodes
+  </th>
+  <td mat-cell *matCellDef="let element"> {{element.nodes}} </td>
+</ng-container>
+
+<!-- Symbol Column -->
+<ng-container matColumnDef="tasksPerNode">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by tasksPerNode">
+    Tasks Per Node
+  </th>
+  <td mat-cell *matCellDef="let element"> {{element.tasksPerNode}} </td>
+</ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+<tr
+mat-row
+(click)="addRow(row)"
+[class.demo-row-is-clicked]="clickedRows.has(row)"
+*matRowDef="let row; columns: displayedColumns;"
+></tr>
+</table>
+
+
+  <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[5, 10, 20] "
+  showFirstLastButtons 
+  aria-label="Select page of periodic elements">
+  </mat-paginator>
+ <!--
+<mat-tab-group>
+    <mat-tab label="From Database">
+ --> 
+
+
+<!--
+</mat-tab>
+</mat-tab-group>
+-->
+
+</div>
+
