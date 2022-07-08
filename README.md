@@ -179,8 +179,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Sarah Neuwirth - s.neuwirth@em.uni-frankfurt.de
-Zhaobin Zhu - zhu@em.uni-frankfurt.de
+ * Sarah Neuwirth - s.neuwirth@em.uni-frankfurt.de
+ * Zhaobin Zhu - zhu@em.uni-frankfurt.de
 
 
 Project Link: [https://github.com/lalilalalalu/IO-Knowledge](https://github.com/lalilalalalu/IO-Knowledge)
