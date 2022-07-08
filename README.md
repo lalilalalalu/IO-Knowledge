@@ -11,9 +11,6 @@
   <p align="center">
     With the growing gap between computational power and underlying storage systems, and the lack of I/O expertise, I/O resources need to be used efficiently, and the required knowledge needs to be easily accessible. For this purpose, we present a generic workflow, and a possible implementation that realizes each phase of the knowledge cycle.
     <br />
-    <a href="https://github.com/lalilalalalu/IO-Knowledge"><strong>Explore the docs »</strong></a>
-    <br />
-    <br />
     <a href="https://github.com/lalilalalalu/IO-Knowledge/issues">Report Bug</a>
     ·
     <a href="https://github.com/lalilalalalu/IO-Knowledge/issues">Request Feature</a>
